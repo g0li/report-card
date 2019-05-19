@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.lilliemountain.reportcard.R;
 import com.lilliemountain.reportcard.ReportCardManager;
 import com.lilliemountain.reportcard.model.Child;
+import com.lilliemountain.reportcard.model.ProgressReport;
 import com.lilliemountain.reportcard.model.TimeTable;
 
 public class ChildActivity extends AppCompatActivity implements View.OnClickListener {
@@ -58,6 +59,8 @@ public class ChildActivity extends AppCompatActivity implements View.OnClickList
         findViewById(R.id.attendance).setOnClickListener(this);
         findViewById(R.id.syllabus).setOnClickListener(this);
         findViewById(R.id.timetable).setOnClickListener(this);
+        findViewById(R.id.academiccalender).setOnClickListener(this);
+        findViewById(R.id.progressreport).setOnClickListener(this);
     }
 
     @Override
@@ -89,7 +92,16 @@ public class ChildActivity extends AppCompatActivity implements View.OnClickList
                 ActivityOptionsCompat timetable = ActivityOptionsCompat.makeSceneTransitionAnimation(this, v, "timetable");
                 startActivity(new Intent(ChildActivity.this, TimeTableActivity.class)
                         .putExtra("schoolKey",schoolKey)
-                        .putExtra("rollno",rollno),timetable.toBundle());
+                        .putExtra("rollno",rollno)
+                        .putExtra("grade",child.getChildGrade()),timetable.toBundle());
+                break;
+            case R.id.academiccalender:
+                ActivityOptionsCompat academiccalender = ActivityOptionsCompat.makeSceneTransitionAnimation(this, v, "markDown");
+                startActivity(new Intent(ChildActivity.this, MarkDownActivity.class).putExtra("schoolKey",schoolKey),academiccalender.toBundle());
+                break;
+            case R.id.progressreport:
+                ActivityOptionsCompat progressreport = ActivityOptionsCompat.makeSceneTransitionAnimation(this, v, "markDown");
+                startActivity(new Intent(ChildActivity.this, ProgressReportActivity.class).putExtra("schoolKey",schoolKey),progressreport.toBundle());
                 break;
         }
     }

@@ -55,7 +55,7 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableAdapter.Time
         @Override
         public void onClick(View v) {
             Activity a= (Activity) v.getContext();
-            ActivityOptionsCompat timeTableActivityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(a, v, "syllabus");
+            ActivityOptionsCompat timeTableActivityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(a, v, "markDown");
             v.getContext().startActivity(new Intent(v.getContext(), MarkDownActivity.class).putExtra("markDown",timeTable),timeTableActivityOptionsCompat.toBundle());
         }
     }

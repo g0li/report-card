@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -22,7 +23,7 @@ public class TimeTableActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     FirebaseDatabase database;
     DatabaseReference timetable;
-    String schoolKey;
+    String schoolKey,grade;
     Integer rollno;
     List<TimeTable> timeTables=new ArrayList<>();
     TimeTableAdapter timeTableAdapter;
@@ -32,16 +33,23 @@ public class TimeTableActivity extends AppCompatActivity {
         setContentView(R.layout.activity_time_table);
         recyclerView=findViewById(R.id.recyclerView);
         schoolKey=getIntent().getStringExtra("schoolKey");
+        grade=getIntent().getStringExtra("grade");
         rollno=getIntent().getIntExtra("rollno",0);
+        getSupportActionBar().setTitle("Exam Timetable : "+grade);
+        getSupportActionBar().setSubtitle("rollno : "+rollno);
+        grade=grade.replace(" ","");
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         database=FirebaseDatabase.getInstance();
-        timetable=database.getReference(getString(R.string.instance)).child("schools").child(schoolKey).child("timetable");
+        timetable=database.getReference(getString(R.string.instance)).child("schools").child(schoolKey).child("timetable").child(grade);
         timetable.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 timeTables.clear();
+                Log.e("onDataChange: ", dataSnapshot.getChildrenCount()+"");
+
                 for (DataSnapshot d1 :
                         dataSnapshot.getChildren()) {
+                    Log.e("onDataChange: ", d1.getKey());
                     TimeTable t=d1.getValue(TimeTable.class);
                     timeTables.add(t);
                 }

@@ -56,7 +56,7 @@ public class SyllabusAdapter extends RecyclerView.Adapter<SyllabusAdapter.Syllab
         @Override
         public void onClick(View v) {
             Activity a= (Activity) v.getContext();
-            ActivityOptionsCompat syllabusActivityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(a, v, "syllabus");
+            ActivityOptionsCompat syllabusActivityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(a, v, "markDown");
 
             v.getContext().startActivity(new Intent(v.getContext(), MarkDownActivity.class).putExtra("markDown",syllabus),syllabusActivityOptionsCompat.toBundle());
         }

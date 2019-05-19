@@ -152,8 +152,10 @@
                     android:transitionName="attendance" />
 
                 <TextView
+                    android:id="@+id/progressreport"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:transitionName="progressreport"
                     android:layout_weight="1"
                     android:background="@android:color/holo_blue_dark"
                     android:gravity="center"
@@ -172,16 +174,18 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/academiccalender"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@android:color/holo_green_dark"
                     android:gravity="center"
                     android:padding="4dp"
-                    android:text="Home Work"
+                    android:text="Academic Calender"
                     android:textColor="@android:color/white"
                     android:textSize="24sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:transitionName="markDown" />
 
                 <TextView
                     android:id="@+id/syllabus"
