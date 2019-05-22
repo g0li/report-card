@@ -4,10 +4,14 @@ package com.lilliemountain.reportcard.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class ProgressReport implements Parcelable {
+import com.google.firebase.database.DataSnapshot;
 
+import java.util.ArrayList;
+import java.util.List;
+
+public class ProgressReport implements Parcelable{
     private String testName;
-    private String reportcard;
+    private ArrayList<ReportCard> reportcard=new ArrayList<>();
     private Integer totalMarks;
     private Integer grandTotal;
     private String grade;
@@ -19,26 +23,10 @@ public class ProgressReport implements Parcelable {
     public ProgressReport() {
     }
 
-    /**
-     *
-     * @param reportcard
-     * @param testName
-     * @param totalMarks
-     * @param grandTotal
-     * @param grade
-     */
-    public ProgressReport(String testName, String reportcard, Integer totalMarks, Integer grandTotal, String grade) {
-        super();
-        this.testName = testName;
-        this.reportcard = reportcard;
-        this.totalMarks = totalMarks;
-        this.grandTotal = grandTotal;
-        this.grade = grade;
-    }
 
     protected ProgressReport(Parcel in) {
         testName = in.readString();
-        reportcard = in.readString();
+        reportcard = in.createTypedArrayList(ReportCard.CREATOR);
         if (in.readByte() == 0) {
             totalMarks = null;
         } else {
@@ -50,6 +38,30 @@ public class ProgressReport implements Parcelable {
             grandTotal = in.readInt();
         }
         grade = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(testName);
+        dest.writeTypedList(reportcard);
+        if (totalMarks == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(totalMarks);
+        }
+        if (grandTotal == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(grandTotal);
+        }
+        dest.writeString(grade);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<ProgressReport> CREATOR = new Creator<ProgressReport>() {
@@ -68,17 +80,18 @@ public class ProgressReport implements Parcelable {
         return testName;
     }
 
+    public void setReportCard(ArrayList<ReportCard> reportcard) {
+        this.reportcard = reportcard;
+    }
+
+    public ArrayList<ReportCard> getReportCard() {
+        return reportcard;
+    }
+
     public void setTestName(String testName) {
         this.testName = testName;
     }
 
-    public String getReportcard() {
-        return reportcard;
-    }
-
-    public void setReportcard(String reportcard) {
-        this.reportcard = reportcard;
-    }
 
     public Integer getTotalMarks() {
         return totalMarks;
@@ -104,27 +117,11 @@ public class ProgressReport implements Parcelable {
         this.grade = grade;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(testName);
-        dest.writeString(reportcard);
-        if (totalMarks == null) {
-            dest.writeByte((byte) 0);
-        } else {
-            dest.writeByte((byte) 1);
-            dest.writeInt(totalMarks);
-        }
-        if (grandTotal == null) {
-            dest.writeByte((byte) 0);
-        } else {
-            dest.writeByte((byte) 1);
-            dest.writeInt(grandTotal);
-        }
-        dest.writeString(grade);
+    public ProgressReport(String testName, ArrayList<ReportCard> reportcard, Integer totalMarks, Integer grandTotal, String grade) {
+        this.testName = testName;
+        this.reportcard = reportcard;
+        this.totalMarks = totalMarks;
+        this.grandTotal = grandTotal;
+        this.grade = grade;
     }
 }

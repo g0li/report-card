@@ -16,14 +16,12 @@ import android.widget.TextView;
 import com.lilliemountain.reportcard.R;
 import com.lilliemountain.reportcard.ReportCardManager;
 import com.lilliemountain.reportcard.model.Child;
-import com.lilliemountain.reportcard.model.ProgressReport;
-import com.lilliemountain.reportcard.model.TimeTable;
 
 public class ChildActivity extends AppCompatActivity implements View.OnClickListener {
     Child child;
     String sch,schoolKey;
     TextView name,school,grade,classs;
-    Integer rollno;
+    String rollno;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +42,7 @@ public class ChildActivity extends AppCompatActivity implements View.OnClickList
         child.setChildGender(ReportCardManager.getInstance().getValue("getChildGender"));
         child.setChildName(ReportCardManager.getInstance().getValue("getChildName"));
         child.setChildGender(ReportCardManager.getInstance().getValue("getChildGender"));
-        child.setRollNo(Integer.valueOf(ReportCardManager.getInstance().getValue("getRollNo")));
+        child.setRollNo((ReportCardManager.getInstance().getValue("getRollNo")));
 
         sch=ReportCardManager.getInstance().getValue("sch");
         schoolKey=ReportCardManager.getInstance().getValue("schoolKey");
@@ -61,13 +59,14 @@ public class ChildActivity extends AppCompatActivity implements View.OnClickList
         findViewById(R.id.timetable).setOnClickListener(this);
         findViewById(R.id.academiccalender).setOnClickListener(this);
         findViewById(R.id.progressreport).setOnClickListener(this);
+        findViewById(R.id.parentteacherforum).setOnClickListener(this);
     }
+
 
     @Override
     public void onBackPressed() {
-        supportFinishAfterTransition();
+        finishAfterTransition();
     }
-
     @Override
     protected void onPause() { super.onPause(); }
 
@@ -102,6 +101,10 @@ public class ChildActivity extends AppCompatActivity implements View.OnClickList
             case R.id.progressreport:
                 ActivityOptionsCompat progressreport = ActivityOptionsCompat.makeSceneTransitionAnimation(this, v, "markDown");
                 startActivity(new Intent(ChildActivity.this, ProgressReportActivity.class).putExtra("schoolKey",schoolKey),progressreport.toBundle());
+                break;
+            case R.id.parentteacherforum:
+                ActivityOptionsCompat parentteacherforum = ActivityOptionsCompat.makeSceneTransitionAnimation(this, v, "parentteacherforum");
+                startActivity(new Intent(ChildActivity.this, ParentTeacherForumActivity.class).putExtra("schoolKey",schoolKey),parentteacherforum.toBundle());
                 break;
         }
     }

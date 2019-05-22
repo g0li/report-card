@@ -89,11 +89,11 @@ public class UserActivity extends AppCompatActivity implements ChildAdapter.onCl
                     }
                 }
                 if(of.length()>0)
-                welcomeuser.setText("Welcome Parent of "+of);
+                welcomeuser.setText("Welcome Guardian of "+of);
                 if(children.size()==1)
-                checkoutchild.setText("Checkout what your child is upto.");
+                checkoutchild.setText("Checkout what your child is up to.");
                 else
-                checkoutchild.setText("Checkout what your children are upto.");
+                checkoutchild.setText("Checkout what your children are up to.");
                 childAdapter=new ChildAdapter(children,schoolist,UserActivity.this);
                 kidslist.setAdapter(childAdapter);
             }

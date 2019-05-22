@@ -1,21 +1,57 @@
 package com.lilliemountain.reportcard.model;
 
+import java.util.List;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class TimeTable implements Parcelable {
-    String examName, timetable;
+public class TimeTable implements Parcelable
+{
 
-    public TimeTable(String testName, String timetable) {
-        this.examName = testName;
-        this.timetable = timetable;
+    private String childGrade;
+    private String comments;
+    private String testName;
+    private List<TimeTable_> timeTable = null;
+
+    /**
+     * No args constructor for use in serialization
+     *
+     */
+    public TimeTable() {
     }
 
-    public TimeTable() {}
+    /**
+     *
+     * @param testName
+     * @param childGrade
+     * @param timeTable
+     * @param comments
+     */
+    public TimeTable(String childGrade, String comments, String testName, List<TimeTable_> timeTable) {
+        super();
+        this.childGrade = childGrade;
+        this.comments = comments;
+        this.testName = testName;
+        this.timeTable = timeTable;
+    }
 
     protected TimeTable(Parcel in) {
-        examName = in.readString();
-        timetable = in.readString();
+        childGrade = in.readString();
+        comments = in.readString();
+        testName = in.readString();
+        timeTable = in.createTypedArrayList(TimeTable_.CREATOR);
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(childGrade);
+        dest.writeString(comments);
+        dest.writeString(testName);
+        dest.writeTypedList(timeTable);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<TimeTable> CREATOR = new Creator<TimeTable>() {
@@ -30,30 +66,36 @@ public class TimeTable implements Parcelable {
         }
     };
 
-    public String getExamName() {
-        return examName;
+    public String getChildGrade() {
+        return childGrade;
+    }
+
+    public void setChildGrade(String childGrade) {
+        this.childGrade = childGrade;
+    }
+
+    public String getComments() {
+        return comments;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
+    }
+
+    public String getTestName() {
+        return testName;
     }
 
     public void setTestName(String testName) {
-        this.examName = testName;
+        this.testName = testName;
     }
 
-    public String getTimetable() {
-        return timetable;
+    public List<TimeTable_> getTimeTable() {
+        return timeTable;
     }
 
-    public void setTimetable(String timetable) {
-        this.timetable = timetable;
+    public void setTimeTable(List<TimeTable_> timeTable) {
+        this.timeTable = timeTable;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(examName);
-        dest.writeString(timetable);
-    }
 }

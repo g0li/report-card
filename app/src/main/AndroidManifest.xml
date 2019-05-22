@@ -12,23 +12,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.ProgressReportActivity"></activity>
+        <activity android:name=".activity.TimeTableTestActivity"></activity>
+        <activity android:name=".activity.ParentTeacherForumActivity" />
+        <activity android:name=".activity.TestSyllabusActivity" />
+        <activity android:name=".activity.TestReportActivity" />
+        <activity android:name=".activity.ProgressReportActivity" />
         <activity android:name=".activity.TimeTableActivity" />
         <activity android:name=".activity.MarkDownActivity" />
-        <activity
-            android:name=".activity.SyllabusActivity"
-            android:parentActivityName=".activity.ChildActivity" />
-        <activity
-            android:name=".activity.AttendanceActivity"
-            android:parentActivityName=".activity.ChildActivity" />
+        <activity android:name=".activity.SyllabusActivity" />
+        <activity android:name=".activity.AttendanceActivity" />
 
         <meta-data
             android:name="android.app.searchable"
             android:resource="@xml/searchable" />
 
-        <activity
-            android:name=".activity.ChildActivity"
-            android:parentActivityName=".activity.UserActivity" />
+        <activity android:name=".activity.ChildActivity" />
         <activity android:name=".activity.UserActivity" />
         <activity android:name=".activity.LoginActivity">
             <intent-filter>

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Report Card</string>
+    <string name="app_name">Guardian</string>
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
     <string name="sign_in">Sign In</string>

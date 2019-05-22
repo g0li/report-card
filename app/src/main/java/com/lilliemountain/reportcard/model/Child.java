@@ -11,7 +11,7 @@ public class Child implements Parcelable {
     private String childGrade;
     private String childName;
     private String parentEmail;
-    private Integer rollNo;
+    private String rollNo;
 
     public Child() {}
 
@@ -22,11 +22,7 @@ public class Child implements Parcelable {
         childGrade = in.readString();
         childName = in.readString();
         parentEmail = in.readString();
-        if (in.readByte() == 0) {
-            rollNo = null;
-        } else {
-            rollNo = in.readInt();
-        }
+        rollNo = in.readString();
     }
 
     public static final Creator<Child> CREATOR = new Creator<Child>() {
@@ -89,11 +85,11 @@ public class Child implements Parcelable {
         this.parentEmail = parentEmail;
     }
 
-    public Integer getRollNo() {
+    public String getRollNo() {
         return rollNo;
     }
 
-    public void setRollNo(Integer rollNo) {
+    public void setRollNo(String rollNo) {
         this.rollNo = rollNo;
     }
 
@@ -110,11 +106,6 @@ public class Child implements Parcelable {
         dest.writeString(childGrade);
         dest.writeString(childName);
         dest.writeString(parentEmail);
-        if (rollNo == null) {
-            dest.writeByte((byte) 0);
-        } else {
-            dest.writeByte((byte) 1);
-            dest.writeInt(rollNo);
-        }
+        dest.writeString(rollNo);
     }
 }

@@ -32,7 +32,7 @@ import java.util.List;
 import java.util.Set;
 
 public class AttendanceActivity extends AppCompatActivity {
-    Integer rollno;
+    String rollno;
     String schoolKey;
     FirebaseDatabase database;
     DatabaseReference instance,attendance;
@@ -57,7 +57,7 @@ public class AttendanceActivity extends AppCompatActivity {
         datetv=findViewById(R.id.date);
         my=findViewById(R.id.my);
         d=findViewById(R.id.d);
-        rollno=getIntent().getIntExtra("rollno",0);
+        rollno=getIntent().getStringExtra("rollno");
         getSupportActionBar().setTitle("Attendance");
         getSupportActionBar().setSubtitle("Roll no :" + rollno);
 
@@ -82,7 +82,7 @@ public class AttendanceActivity extends AppCompatActivity {
                         Log.e( "d2.getKey(): ",d2.getKey() );
 
                         Attendance a=d2.getValue(Attendance.class);
-                        if(a.getRollNo().equals(rollno))
+                        if(a.getRollNo().toString().equals(rollno))
                         attendanceList.add(a);
                     }
                     Log.e( "d1.getKey(): ",d1.getKey() );
@@ -108,6 +108,7 @@ public class AttendanceActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String key=myStringList.get(position);
+                datesList.clear();
                 datesList.addAll(stringListHashMap.get(key));
                 final List<String>dates=new ArrayList<>();
                 for (Attendance a :
@@ -180,8 +181,9 @@ public class AttendanceActivity extends AppCompatActivity {
         });
     }
 
+
     @Override
     public void onBackPressed() {
-        supportFinishAfterTransition();
+        finishAfterTransition();
     }
 }

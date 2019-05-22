@@ -5,16 +5,24 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
 import com.lilliemountain.reportcard.R;
 import com.lilliemountain.reportcard.activity.MarkDownActivity;
+import com.lilliemountain.reportcard.activity.TestReportActivity;
 import com.lilliemountain.reportcard.model.ProgressReport;
+import com.lilliemountain.reportcard.model.ReportCard;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 public class ProgressReportAdapter extends RecyclerView.Adapter<ProgressReportAdapter.ProgressReportHolder> {
     List<ProgressReport> progressReports;
@@ -61,10 +69,8 @@ public class ProgressReportAdapter extends RecyclerView.Adapter<ProgressReportAd
         @Override
         public void onClick(View v) {
             Activity a= (Activity) v.getContext();
-            ActivityOptionsCompat syllabusActivityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(a, v, "markDown");
-
-            v.getContext().startActivity(new Intent(v.getContext(), MarkDownActivity.class).putExtra("markDown",progressReport),syllabusActivityOptionsCompat.toBundle());
-
+            ActivityOptionsCompat progressReportActivityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(a, v, "progressReport");
+            v.getContext().startActivity(new Intent(v.getContext(), TestReportActivity.class).putExtra("progressReport",progressReport),progressReportActivityOptionsCompat.toBundle());
         }
     }
 }

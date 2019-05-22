@@ -3,19 +3,28 @@ package com.lilliemountain.reportcard.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.firebase.database.DataSnapshot;
+
+import java.util.ArrayList;
+
 public class Syllabus implements Parcelable {
-    String testName,syllabus;
-
-    public Syllabus(String testName, String syllabus) {
-        this.testName = testName;
-        this.syllabus = syllabus;
-    }
-
-    public Syllabus() {}
+    String testName, childGrade  ;
+    ArrayList<DataSnapshot> syllabusinfo;
 
     protected Syllabus(Parcel in) {
         testName = in.readString();
-        syllabus = in.readString();
+        childGrade = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(testName);
+        dest.writeString(childGrade);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<Syllabus> CREATOR = new Creator<Syllabus>() {
@@ -38,22 +47,28 @@ public class Syllabus implements Parcelable {
         this.testName = testName;
     }
 
-    public String getSyllabus() {
-        return syllabus;
+    public String getChildGrade() {
+        return childGrade;
     }
 
-    public void setSyllabus(String syllabus) {
-        this.syllabus = syllabus;
+    public void setChildGrade(String childGrade) {
+        this.childGrade = childGrade;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public ArrayList<DataSnapshot> getSyllabusinfo() {
+        return syllabusinfo;
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(testName);
-        dest.writeString(syllabus);
+    public void setSyllabusinfo(ArrayList<DataSnapshot> syllabusinfo) {
+        this.syllabusinfo = syllabusinfo;
+    }
+
+    public Syllabus() {
+    }
+
+    public Syllabus(String testName, String childGrade, ArrayList<DataSnapshot> syllabusinfo) {
+        this.testName = testName;
+        this.childGrade = childGrade;
+        this.syllabusinfo = syllabusinfo;
     }
 }

@@ -7,23 +7,24 @@ import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.ActivityChooserView;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.lilliemountain.reportcard.R;
-import com.lilliemountain.reportcard.activity.MarkDownActivity;
-import com.lilliemountain.reportcard.model.Syllabus;
+import com.lilliemountain.reportcard.activity.TestSyllabusActivity;
+import com.lilliemountain.reportcard.model.Syllabus_;
+import com.lilliemountain.reportcard.model.UpperSyllabus;
 
-import java.util.List;
-
+import java.util.ArrayList;
 public class SyllabusAdapter extends RecyclerView.Adapter<SyllabusAdapter.SyllabusHolder> {
-    List<Syllabus> syllabusList;
-
-    public SyllabusAdapter(List<Syllabus> syllabusList) {
+    public SyllabusAdapter(ArrayList<UpperSyllabus> syllabusList    ) {
         this.syllabusList = syllabusList;
     }
+    ArrayList<UpperSyllabus>syllabusList=new ArrayList<>();
+    ArrayList<Syllabus_> s=new ArrayList<>();
 
     @NonNull
     @Override
@@ -34,8 +35,10 @@ public class SyllabusAdapter extends RecyclerView.Adapter<SyllabusAdapter.Syllab
 
     @Override
     public void onBindViewHolder(@NonNull SyllabusHolder syllabusHolder, int i) {
-        syllabusHolder.testName.setText(syllabusList.get(i).getTestName());
-        syllabusHolder.syllabus=syllabusList.get(i);
+        syllabusHolder.testName.setText("•  "+syllabusList.get(i).getSyllabus().getTestName());
+        syllabusHolder.testNames=syllabusList.get(i).getSyllabus().getTestName();
+        syllabusHolder.position=i;
+
     }
 
     @Override
@@ -44,8 +47,9 @@ public class SyllabusAdapter extends RecyclerView.Adapter<SyllabusAdapter.Syllab
     }
 
     public class SyllabusHolder extends ViewHolder implements View.OnClickListener {
-        Syllabus syllabus;
+        int position;
         TextView testName;
+        String testNames;
         public SyllabusHolder(@NonNull View itemView) {
             super(itemView);
             testName=itemView.findViewById(R.id.testName);
@@ -55,10 +59,13 @@ public class SyllabusAdapter extends RecyclerView.Adapter<SyllabusAdapter.Syllab
 
         @Override
         public void onClick(View v) {
+            s.clear();
+            s.addAll(syllabusList.get(position).getList());
             Activity a= (Activity) v.getContext();
-            ActivityOptionsCompat syllabusActivityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(a, v, "markDown");
-
-            v.getContext().startActivity(new Intent(v.getContext(), MarkDownActivity.class).putExtra("markDown",syllabus),syllabusActivityOptionsCompat.toBundle());
+            ActivityOptionsCompat attendance = ActivityOptionsCompat.makeSceneTransitionAnimation(a, v, "testAct");
+            v.getContext().startActivity(new Intent(v.getContext(), TestSyllabusActivity.class)
+                    .putExtra("testName",testNames)
+                    .putExtra("s",s),attendance.toBundle());
         }
     }
 }

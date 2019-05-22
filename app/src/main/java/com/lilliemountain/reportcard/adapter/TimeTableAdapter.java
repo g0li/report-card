@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.lilliemountain.reportcard.R;
 import com.lilliemountain.reportcard.activity.MarkDownActivity;
+import com.lilliemountain.reportcard.activity.TimeTableTestActivity;
 import com.lilliemountain.reportcard.model.TimeTable;
 
 import java.util.List;
@@ -33,7 +34,7 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableAdapter.Time
 
     @Override
     public void onBindViewHolder(@NonNull TimeTableHolder timeTableHolder, int i) {
-        timeTableHolder.testName.setText(timeTableList.get(i).getExamName());
+        timeTableHolder.testName.setText(timeTableList.get(i).getTestName());
         timeTableHolder.timeTable=timeTableList.get(i);
     }
 
@@ -55,8 +56,8 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableAdapter.Time
         @Override
         public void onClick(View v) {
             Activity a= (Activity) v.getContext();
-            ActivityOptionsCompat timeTableActivityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(a, v, "markDown");
-            v.getContext().startActivity(new Intent(v.getContext(), MarkDownActivity.class).putExtra("markDown",timeTable),timeTableActivityOptionsCompat.toBundle());
+            ActivityOptionsCompat timeTableActivityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(a, v, "syllabus");
+            v.getContext().startActivity(new Intent(v.getContext(), TimeTableTestActivity.class).putExtra("timeTable",timeTable),timeTableActivityOptionsCompat.toBundle());
         }
     }
 }
