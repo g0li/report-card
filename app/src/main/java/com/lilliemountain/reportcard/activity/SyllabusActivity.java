@@ -65,17 +65,20 @@ public class SyllabusActivity extends AppCompatActivity {
         recyclerView=findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        getSupportActionBar().setTitle("grade :"+grade);
-        getSupportActionBar().setSubtitle("rollno :"+rollno);
+        getSupportActionBar().setTitle(getString(R.string.grade).toLowerCase()+grade);
+        getSupportActionBar().setSubtitle(getString(R.string.rollno).toLowerCase()+rollno);
         database=FirebaseDatabase.getInstance();
-        gradeRef=database.getReference(getString(R.string.instance)).child("schools").child(schoolKey).child("syllabus_new");
+        gradeRef=database.getReference(getString(R.string.instance)).child("schools").child(schoolKey).child("syllabus");
         Query myTopPostsQuery = gradeRef.orderByChild("childGrade").equalTo(grade);
         myTopPostsQuery.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Log.e( "dataSnapshot: ", dataSnapshot.getChildrenCount()+"");
+
                 for (DataSnapshot d2 :
                         dataSnapshot.getChildren()) {
                     Syllabus syllabus=d2.getValue(Syllabus.class);
+                    Log.e( "syllabus: ", syllabus.getChildGrade());
                     ArrayList<Syllabus_> syllabi_=new ArrayList<>();
                     for (DataSnapshot d3 :
                             d2.child("syllabusInfo").getChildren()) {
@@ -91,7 +94,6 @@ public class SyllabusActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Log.e( "databaseError: ",databaseError.toString() );
-
             }
         });
     }

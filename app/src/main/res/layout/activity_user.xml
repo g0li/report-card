@@ -16,6 +16,7 @@
             android:id="@+id/welcomeuser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_sans"
             android:textColor="#000"
             android:textSize="24sp"
             android:textStyle="bold" />
@@ -24,6 +25,7 @@
             android:id="@+id/checkoutchild"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_sans"
             android:textColor="#000"
             android:textSize="18sp" />
 

@@ -1,24 +1,27 @@
 package com.lilliemountain.reportcard.adapter;
 
+import android.animation.ObjectAnimator;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.lilliemountain.reportcard.R;
+import com.lilliemountain.reportcard.model.ProgressCard;
 import com.lilliemountain.reportcard.model.ReportCard;
 
 import java.util.ArrayList;
 
 public class TestReportAdapter extends RecyclerView.Adapter<TestReportAdapter.TestReportHolder> {
-    public TestReportAdapter(ArrayList<ReportCard> list) {
+    public TestReportAdapter(ArrayList<ProgressCard> list) {
         this.list = list;
     }
 
-    ArrayList<ReportCard> list;
+    ArrayList<ProgressCard> list;
 
     @NonNull
     @Override
@@ -32,10 +35,17 @@ public class TestReportAdapter extends RecyclerView.Adapter<TestReportAdapter.Te
         testReportHolder.subject.setText(list.get(i).getSubject());
         testReportHolder.fraction.setText("marks "+list.get(i).getMarks()+"/"+list.get(i).getTotalmarks());
         testReportHolder.grade.setText(list.get(i).getGrade());
-        testReportHolder.progress.setMax(Integer.parseInt(list.get(i).getTotalmarks()));
-        testReportHolder.progress.setProgress(Integer.parseInt(list.get(i).getMarks()));
+        testReportHolder.progress.setMax(list.get(i).getTotalmarks());
+        setProgressAnimate(testReportHolder.progress,list.get(i).getMarks());
     }
 
+    private void setProgressAnimate(ProgressBar pb, int progressTo)
+    {
+        ObjectAnimator animation = ObjectAnimator.ofInt(pb, "progress", pb.getProgress(), progressTo );
+        animation.setDuration(900);
+        animation.setInterpolator(new DecelerateInterpolator());
+        animation.start();
+    }
     @Override
     public int getItemCount() {
         return list.size();

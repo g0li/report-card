@@ -1,20 +1,20 @@
 package com.lilliemountain.reportcard.model;
 
-
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.google.firebase.database.DataSnapshot;
-
 import java.util.ArrayList;
-import java.util.List;
 
-public class ProgressReport implements Parcelable{
-    private String testName;
-    private ArrayList<ReportCard> reportcard=new ArrayList<>();
-    private Integer totalMarks;
-    private Integer grandTotal;
+public class ProgressReport implements Parcelable {
+
+    private String childClass;
+    private String childGrade;
     private String grade;
+    private Integer grandTotal;
+    private String rollNo;
+    private String testName;
+    private ArrayList<ProgressCard> progressCard = new ArrayList<>();
+    private Integer totalMarks;
 
     /**
      * No args constructor for use in serialization
@@ -23,40 +23,68 @@ public class ProgressReport implements Parcelable{
     public ProgressReport() {
     }
 
+    /**
+     *
+     * @param childClass
+     * @param testName
+     * @param totalMarks
+     * @param rollNo
+     * @param childGrade
+     * @param progressCard
+     * @param grandTotal
+     * @param grade
+     */
+    public ProgressReport(String childClass, String childGrade, String grade, Integer grandTotal, String rollNo, String testName, ArrayList<ProgressCard> progressCard, Integer totalMarks) {
+        super();
+        this.childClass = childClass;
+        this.childGrade = childGrade;
+        this.grade = grade;
+        this.grandTotal = grandTotal;
+        this.rollNo = rollNo;
+        this.testName = testName;
+        this.progressCard = progressCard;
+        this.totalMarks = totalMarks;
+    }
 
     protected ProgressReport(Parcel in) {
-        testName = in.readString();
-        reportcard = in.createTypedArrayList(ReportCard.CREATOR);
-        if (in.readByte() == 0) {
-            totalMarks = null;
-        } else {
-            totalMarks = in.readInt();
-        }
+        childClass = in.readString();
+        childGrade = in.readString();
+        grade = in.readString();
+        rollNo = in.readString();
         if (in.readByte() == 0) {
             grandTotal = null;
         } else {
             grandTotal = in.readInt();
         }
-        grade = in.readString();
+        testName = in.readString();
+        progressCard = in.createTypedArrayList(ProgressCard.CREATOR);
+        if (in.readByte() == 0) {
+            totalMarks = null;
+        } else {
+            totalMarks = in.readInt();
+        }
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(testName);
-        dest.writeTypedList(reportcard);
-        if (totalMarks == null) {
-            dest.writeByte((byte) 0);
-        } else {
-            dest.writeByte((byte) 1);
-            dest.writeInt(totalMarks);
-        }
+        dest.writeString(childClass);
+        dest.writeString(childGrade);
+        dest.writeString(grade);
+        dest.writeString(rollNo);
         if (grandTotal == null) {
             dest.writeByte((byte) 0);
         } else {
             dest.writeByte((byte) 1);
             dest.writeInt(grandTotal);
         }
-        dest.writeString(grade);
+        dest.writeString(testName);
+        dest.writeTypedList(progressCard);
+        if (totalMarks == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(totalMarks);
+        }
     }
 
     @Override
@@ -76,37 +104,20 @@ public class ProgressReport implements Parcelable{
         }
     };
 
-    public String getTestName() {
-        return testName;
+    public String getChildClass() {
+        return childClass;
     }
 
-    public void setReportCard(ArrayList<ReportCard> reportcard) {
-        this.reportcard = reportcard;
+    public void setChildClass(String childClass) {
+        this.childClass = childClass;
     }
 
-    public ArrayList<ReportCard> getReportCard() {
-        return reportcard;
+    public String getChildGrade() {
+        return childGrade;
     }
 
-    public void setTestName(String testName) {
-        this.testName = testName;
-    }
-
-
-    public Integer getTotalMarks() {
-        return totalMarks;
-    }
-
-    public void setTotalMarks(Integer totalMarks) {
-        this.totalMarks = totalMarks;
-    }
-
-    public Integer getGrandTotal() {
-        return grandTotal;
-    }
-
-    public void setGrandTotal(Integer grandTotal) {
-        this.grandTotal = grandTotal;
+    public void setChildGrade(String childGrade) {
+        this.childGrade = childGrade;
     }
 
     public String getGrade() {
@@ -117,11 +128,44 @@ public class ProgressReport implements Parcelable{
         this.grade = grade;
     }
 
-    public ProgressReport(String testName, ArrayList<ReportCard> reportcard, Integer totalMarks, Integer grandTotal, String grade) {
-        this.testName = testName;
-        this.reportcard = reportcard;
-        this.totalMarks = totalMarks;
-        this.grandTotal = grandTotal;
-        this.grade = grade;
+    public Integer getGrandTotal() {
+        return grandTotal;
     }
+
+    public void setGrandTotal(Integer grandTotal) {
+        this.grandTotal = grandTotal;
+    }
+
+    public String getRollNo() {
+        return rollNo;
+    }
+
+    public void setRollNo(String rollNo) {
+        this.rollNo = rollNo;
+    }
+
+    public String getTestName() {
+        return testName;
+    }
+
+    public void setTestName(String testName) {
+        this.testName = testName;
+    }
+
+    public ArrayList<ProgressCard> getProgressCard() {
+        return progressCard;
+    }
+
+    public void setProgressCard(ArrayList<ProgressCard> progressCard) {
+        this.progressCard = progressCard;
+    }
+
+    public Integer getTotalMarks() {
+        return totalMarks;
+    }
+
+    public void setTotalMarks(Integer totalMarks) {
+        this.totalMarks = totalMarks;
+    }
+
 }

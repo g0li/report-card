@@ -57,6 +57,7 @@ public class AttendanceActivity extends AppCompatActivity {
         datetv=findViewById(R.id.date);
         my=findViewById(R.id.my);
         d=findViewById(R.id.d);
+
         rollno=getIntent().getStringExtra("rollno");
         getSupportActionBar().setTitle("Attendance");
         getSupportActionBar().setSubtitle("Roll no :" + rollno);
@@ -97,6 +98,7 @@ public class AttendanceActivity extends AppCompatActivity {
                 }
                 myArrayAdapter=new ArrayAdapter<>(AttendanceActivity.this,R.layout.item_spinner,myStringList);
                 my.setAdapter(myArrayAdapter);
+
             }
 
             @Override
@@ -122,11 +124,8 @@ public class AttendanceActivity extends AppCompatActivity {
                                                 ViewGroup parent) {
                         View view = super.getDropDownView(position, convertView, parent);
                         TextView tv = (TextView) view;
-                        Log.e("dates",dates.get(position));
                         if (datesList.get(position).getAttendance().toLowerCase().equals("absent")) {
                             tv.setTextColor(Color.parseColor("#B22222"));
-                            Log.e("dates",dates.get(position));
-                            Log.e("dates", String.valueOf((position)));
                         }
                         else {
                             tv.setTextColor(Color.parseColor("#000000"));
@@ -148,7 +147,7 @@ public class AttendanceActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String date= new SimpleDateFormat("dd/MM/yyy").format(Calendar.getInstance().getTime());
                 if(date.equals(datesList.get(position).getDateOfAttendance()))
-                    datetv.setText("Today");
+                    datetv.setText(getString(R.string.today));
                 else
                     datetv.setText(datesList.get(position).getDateOfAttendance());
                 attendance2.setText(datesList.get(position).getAttendance());
@@ -168,10 +167,10 @@ public class AttendanceActivity extends AppCompatActivity {
                     if(datesList.get(i).getAttendance().equals("present"))
                         present++;
                 }
-                String s="Total attendance is "+present.intValue()+"/"+datesList.size();
+                String s=getString(R.string.total_att)+" "+present.intValue()+"/"+datesList.size();
                 ratio.setText(s);
                 Double perc=present/datesList.size()*100;
-                percentage.setText(("Attendance of " + my.getSelectedItem().toString() + " is " +perc+" %."));
+                percentage.setText((getString(R.string.att_of)+" " + my.getSelectedItem().toString() + " - " +perc+" %."));
             }
 
             @Override
@@ -180,7 +179,6 @@ public class AttendanceActivity extends AppCompatActivity {
             }
         });
     }
-
 
     @Override
     public void onBackPressed() {

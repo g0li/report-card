@@ -1,14 +1,12 @@
 package com.lilliemountain.reportcard.activity;
 
 import android.content.Intent;
+import android.graphics.LinearGradient;
+import android.graphics.Shader;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.transition.AutoTransition;
-import android.transition.ChangeScroll;
 import android.transition.Explode;
-import android.transition.Fade;
-import android.transition.Slide;
 import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
@@ -47,8 +45,8 @@ public class ChildActivity extends AppCompatActivity implements View.OnClickList
         sch=ReportCardManager.getInstance().getValue("sch");
         schoolKey=ReportCardManager.getInstance().getValue("schoolKey");
 
-        getSupportActionBar().setTitle("n : "+child.getChildName());
-        getSupportActionBar().setSubtitle("roll no : "+child.getRollNo());
+        getSupportActionBar().setTitle(child.getChildName());
+        getSupportActionBar().setSubtitle(getString(R.string.rollno)+" "+child.getRollNo());
         name.setText(child.getChildName());
         school.setText(sch);
         grade.setText(child.getChildGrade());

@@ -11,6 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginRight="4dp"
+        android:fontFamily="@font/nunito_sans"
         android:text="•"
         android:textColor="@color/colorPrimary" />
 
@@ -27,6 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="@font/nunito_sans"
             android:gravity="center_vertical"
             android:textColor="#FF313030" />
 
@@ -35,6 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="@font/nunito_sans"
             android:gravity="center_vertical"
             android:textColor="#FF313030" />
     </LinearLayout>
@@ -45,6 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="2dp"
         android:layout_weight="1"
+        android:fontFamily="@font/nunito_sans"
         android:gravity="center_vertical"
         android:textColor="#FF313030" />
 
@@ -54,6 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="2dp"
         android:layout_weight="1"
+        android:fontFamily="@font/nunito_sans"
         android:gravity="center_vertical"
         android:textColor="#FF313030" />
 

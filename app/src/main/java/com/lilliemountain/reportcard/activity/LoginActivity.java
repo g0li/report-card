@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -21,9 +23,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.lilliemountain.reportcard.R;
+import com.lilliemountain.reportcard.ReportCardManager;
 
 public class LoginActivity extends AppCompatActivity {
-    private  String TAG = LoginActivity.class.getSimpleName();
     EditText fieldEmail,fieldPassword;
     private FirebaseAuth mAuth;
     ProgressBar progressBar;
@@ -32,41 +34,65 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         FirebaseApp.initializeApp(this);
         setContentView(R.layout.activity_login);
+        Intent exitIntent=getIntent();
+        if(getIntent()!=null){
+            if(exitIntent.hasExtra("EXIT")){
+                if(exitIntent.getBooleanExtra("EXIT",false)){
+                    super.finish();
+                    System.exit(0);
+
+                }
+            }
+        }
+
+
         mAuth = FirebaseAuth.getInstance();
         fieldEmail=findViewById(R.id.fieldEmail);
         progressBar=findViewById(R.id.progressBar);
         fieldPassword=findViewById(R.id.fieldPassword);
+        progressBar.setVisibility(View.GONE);
 
         findViewById(R.id.emailSignInButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressBar.setVisibility(View.VISIBLE);
                 findViewById(R.id.emailSignInButton).setClickable(false);
-                mAuth.signInWithEmailAndPassword(fieldEmail.getText().toString(), fieldPassword.getText().toString())
-                        .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    // Sign in success, update UI with the signed-in user's information
-                                    final FirebaseUser user = mAuth.getCurrentUser();
-                                    if(user!=null)
-                                    {
-                                          startActivity(new Intent(LoginActivity.this, UserActivity.class));
-                                    }
-
-                                } else {
-                                    // If sign in fails, display a message to the user.
-                                    Toast.makeText(LoginActivity.this, "Authentication failed.",
-                                            Toast.LENGTH_SHORT).show();
-                                    findViewById(R.id.emailSignInButton).setClickable(true);                                                progressBar.setVisibility(View.GONE);
-                                    progressBar.setVisibility(View.GONE);
-                                }
-
-                                // ...
-                            }
-                        });
+                if (fieldEmail.getText().toString().isEmpty()) {
+                    Toast.makeText(LoginActivity.this, "Email cannot be left empty", Toast.LENGTH_SHORT).show();
+                } else if (fieldPassword.getText().toString().isEmpty()) {
+                    Toast.makeText(LoginActivity.this, "Password cannot be left empty", Toast.LENGTH_SHORT).show();
+                } else if (fieldPassword.getText().toString().length() < 5) {
+                    Toast.makeText(LoginActivity.this, "Password must have at least 5 characters", Toast.LENGTH_SHORT).show();
+                }
+                //place function here for email auth
+                if (!(fieldEmail.getText().toString().isEmpty()) && !(fieldPassword.getText().toString().isEmpty()) && !(fieldPassword.getText().toString().length() <5)) {
+                    login();
+                }
             }
         });
+    }
+    void login(){
+        progressBar.setVisibility(View.VISIBLE);
+        mAuth.signInWithEmailAndPassword(fieldEmail.getText().toString(), fieldPassword.getText().toString())
+                .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            final FirebaseUser user = mAuth.getCurrentUser();
+                            if(user!=null)
+                            {
+                                startActivity(new Intent(LoginActivity.this, UserActivity.class));
+                            }
+
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                            findViewById(R.id.emailSignInButton).setClickable(true);                                                progressBar.setVisibility(View.GONE);
+                            progressBar.setVisibility(View.GONE);
+                        }
+                    }
+                });
     }
     FirebaseUser currentUser;
     @Override
@@ -74,44 +100,25 @@ public class LoginActivity extends AppCompatActivity {
         super.onStart();
         currentUser = mAuth.getCurrentUser();
         progressBar.setVisibility(View.VISIBLE);
-
+        String as=getIntent().getStringExtra("as");
+        if (as=="as")
+        {
+            System.exit(0);
+        }
         if(currentUser!=null)
         {
-                            startActivity(new Intent(LoginActivity.this, UserActivity.class));
-
-//            findViewById(R.id.emailSignInButton).setClickable(false);
-//            database=FirebaseDatabase.getInstance();
-//            instance=database.getReference(getString(R.string.instance));
-//            admins=instance.child("committee");
-//            admins.addValueEventListener(new ValueEventListener() {
-//                @Override
-//                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                    progressBar.setVisibility(View.GONE);
-//
-//                    for (DataSnapshot dataSnapshot1:
-//                            dataSnapshot.getChildren()) {
-////                        Committee committee=dataSnapshot1.getValue(Committee.class);
-////
-////
-////                        if(committee.getEmail().toLowerCase().equals(currentUser.getEmail().toLowerCase())){
-////                            startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
-////                        }
-////                        else {
-////                            startActivity(new Intent(LoginActivity.this, UserActivity.class));
-////                        }
-//                    }
-//                }
-//                @Override
-//                public void onCancelled(@NonNull DatabaseError databaseError) {
-//                    progressBar.setVisibility(View.GONE);
-//
-//                }
-//            });
+            startActivity(new Intent(LoginActivity.this, UserActivity.class));
         }
+        else
+            progressBar.setVisibility(View.GONE);
+
     }
 
-    @Override
-    public void onBackPressed() {
-        finish();
+    public void onBackPressed(){
+        Intent a = new Intent(Intent.ACTION_MAIN);
+        a.addCategory(Intent.CATEGORY_HOME);
+        a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(a);
+
     }
 }

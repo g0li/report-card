@@ -25,12 +25,14 @@
                 android:id="@+id/messagethem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_sans"
                 android:textColor="#fff" />
 
             <TextView
                 android:id="@+id/timestampthem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_sans"
                 android:gravity="right"
                 android:textColor="#C8C8C8" />
         </LinearLayout>
@@ -55,12 +57,14 @@
                 android:id="@+id/messageme"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_sans"
                 android:textColor="#fff" />
 
             <TextView
                 android:id="@+id/timestampme"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_sans"
                 android:gravity="right"
                 android:textColor="#C8C8C8" />
         </LinearLayout>

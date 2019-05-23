@@ -43,7 +43,7 @@ public class ParentTeacherForumActivity extends AppCompatActivity {
         everything=findViewById(R.id.everything);
         messageme=findViewById(R.id.messageme);
         everything.setLayoutManager(new LinearLayoutManager(this));
-        setTitle("Parent Teacher Forum");
+        setTitle(getString(R.string.parent_teacher_forum));
         database=FirebaseDatabase.getInstance();
         String email= FirebaseAuth.getInstance().getCurrentUser().getEmail();
         email=email.replace("@","at").replace(".","dot");

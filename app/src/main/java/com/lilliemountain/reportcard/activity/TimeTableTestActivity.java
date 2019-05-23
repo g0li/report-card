@@ -27,7 +27,7 @@ public class TimeTableTestActivity extends AppCompatActivity {
         getWindow().setExitTransition(new Explode());
         setContentView(R.layout.activity_time_table_test);
         timeTable=getIntent().getParcelableExtra("timeTable");
-        list.add(new TimeTable_("*Subject*","*Date*"));
+        list.add(new TimeTable_(getString(R.string.boldDate),getString(R.string.boldSub)));
         list.addAll(timeTable.getTimeTable());
         getSupportActionBar().setTitle("t: "+timeTable.getTestName());
         getSupportActionBar().setSubtitle("g: "+timeTable.getChildGrade());

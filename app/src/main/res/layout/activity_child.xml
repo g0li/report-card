@@ -145,9 +145,9 @@
                     android:background="@android:color/holo_blue_bright"
                     android:gravity="center"
                     android:padding="4dp"
-                    android:text="Attendance"
+                    android:text="@string/attendance"
                     android:textColor="@android:color/white"
-                    android:textSize="24sp"
+                    android:textSize="18sp"
                     android:textStyle="bold"
                     android:transitionName="attendance" />
 
@@ -155,15 +155,15 @@
                     android:id="@+id/progressreport"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:transitionName="progressreport"
                     android:layout_weight="1"
                     android:background="@android:color/holo_blue_dark"
                     android:gravity="center"
                     android:padding="4dp"
-                    android:text="Progress Report"
+                    android:text="@string/prog_report"
                     android:textColor="@android:color/white"
-                    android:textSize="24sp"
-                    android:textStyle="bold" />
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:transitionName="progressreport" />
 
             </LinearLayout>
 
@@ -181,9 +181,9 @@
                     android:background="@android:color/holo_green_dark"
                     android:gravity="center"
                     android:padding="4dp"
-                    android:text="Academic Calender"
+                    android:text="@string/acad_cal"
                     android:textColor="@android:color/white"
-                    android:textSize="24sp"
+                    android:textSize="18sp"
                     android:textStyle="bold"
                     android:transitionName="markDown" />
 
@@ -195,9 +195,9 @@
                     android:background="@android:color/holo_green_light"
                     android:gravity="center"
                     android:padding="4dp"
-                    android:text="Syllabus"
+                    android:text="@string/syllabus"
                     android:textColor="@android:color/white"
-                    android:textSize="24sp"
+                    android:textSize="18sp"
                     android:textStyle="bold"
                     android:transitionName="timetable" />
 
@@ -217,25 +217,25 @@
                     android:background="@android:color/holo_orange_dark"
                     android:gravity="center"
                     android:padding="4dp"
-                    android:text="Exam\nTimetable"
+                    android:text="@string/time_table"
                     android:textColor="@android:color/white"
-                    android:textSize="24sp"
+                    android:textSize="18sp"
                     android:textStyle="bold"
                     android:transitionName="timetable" />
 
                 <TextView
+                    android:id="@+id/parentteacherforum"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:id="@+id/parentteacherforum"
                     android:background="@android:color/holo_orange_light"
                     android:gravity="center"
-                    android:transitionName="parentteacherforum"
                     android:padding="4dp"
-                    android:text="Parent Teacher\nForum"
+                    android:text="@string/parent_teacher_forum"
                     android:textColor="@android:color/white"
-                    android:textSize="24sp"
-                    android:textStyle="bold" />
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:transitionName="parentteacherforum" />
 
             </LinearLayout>
 

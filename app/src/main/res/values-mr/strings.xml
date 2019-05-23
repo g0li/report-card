@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Guardian</string>
+    <string name="hint_email">ई-मेल</string>
+    <string name="hint_password">पासवर्ड</string>
+    <string name="sign_in">साइन इन</string>
+    <string name="instance">demo-report-card</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="welcome_guardian_of">नमस्कार . शैक्षणिक तपशील - </string>
+    <string name="checkchild">आपल्या मुलाची प्रगती पहा.</string>
+    <string name="checkchildren">आपल्या मुलांची प्रगती पहा.</string>
+    <string name="name">नाव :</string>
+    <string name="grade">वर्ग :</string>
+    <string name="school">शाळा :</string>
+    <string name="boldSub">*विषय*</string>
+    <string name="boldDate">*तारीख*</string>
+    <string name="rollno">हजेरी क्रमांक :</string>
+    <string name="parent_teacher_forum">पालक शिक्षक संदेशन</string>
+    <string name="monthyear">महिना-वर्ष</string>
+    <string name="attendance">उपस्थिती</string>
+    <string name="enter_msg">येथे लिहा</string>
+    <string name="total_marks">एकूण गुण:</string>
+    <string name="avg_marks">सरासरी ग्रेड :</string>
+    <string name="sub">विषय</string>
+    <string name="faculty">शिक्षक</string>
+    <string name="chp">अध्याय</string>
+    <string name="note">नोट</string>
+    <string name="time_table">परीक्षा वेळापत्रक</string>
+    <string name="syllabus">अभ्यासक्रम</string>
+    <string name="acad_cal">शैक्षणिक दिनदर्शिका</string>
+    <string name="prog_report">प्रगती विधानt</string>
+    <string name="text_select_language">भाषा निवडा</string>
+    <string name="text_translate_cancel">रद्द करा</string>
+    <string name="action_change_language">भाषा बदला</string>
+    <string name="pleaseclick">बाहेर पडण्यासाठी परत क्लिक करा</string>
+    <string name="today">आज</string>
+    <string name="total_att">एकूण उपस्थित आहे </string>
+    <string name="att_of">उपस्थिति</string>
+</resources>

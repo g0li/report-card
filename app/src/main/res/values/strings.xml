@@ -4,11 +4,36 @@
     <string name="hint_password">Password</string>
     <string name="sign_in">Sign In</string>
     <string name="instance">demo-report-card</string>
-    <string name="title_activity_every_thing">EveryThingActivity</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_everything">EverythingActivity</string>
+    <string name="welcome_guardian_of">Welcome Guardian of &#160;</string>
+    <string name="checkchild">Checkout what your child is up to.</string>
+    <string name="checkchildren">Checkout what your children are up to.</string>
+    <string name="name">Name :</string>
+    <string name="grade">Grade :</string>
+    <string name="school">School :</string>
+    <string name="boldSub">*Subject*</string>
+    <string name="boldDate">*Date*</string>
+    <string name="rollno">Rollno :</string>
+    <string name="parent_teacher_forum">Parent Teacher Forum</string>
+    <string name="monthyear">Month-Year</string>
+    <string name="attendance">Attendance</string>
+    <string name="enter_msg">Enter message</string>
+    <string name="total_marks">Total Marks:</string>
+    <string name="avg_marks">Average Grade :</string>
+    <string name="sub">Subject</string>
+    <string name="faculty">Faculty</string>
+    <string name="chp">Chapters</string>
+    <string name="note">Note</string>
+    <string name="time_table">Exam Timetable</string>
+    <string name="syllabus">Syllabus</string>
+    <string name="acad_cal">Academic Calender</string>
+    <string name="prog_report">Progress Report</string>
+    <string name="text_select_language">Select Language</string>
+    <string name="text_translate_cancel">Cancel</string>
+    <string name="action_change_language">Change Language</string>
+    <string name="pleaseclick">Please click Back again to exit</string>
+    <string name="today">Today</string>
+    <string name="total_att">Total attendance is</string>
+    <string name="att_of">Attendance of</string>
 </resources>

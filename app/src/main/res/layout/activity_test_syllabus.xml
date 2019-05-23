@@ -30,7 +30,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Subject"
+                android:fontFamily="@font/nunito_sans"
+                android:text="@string/sub"
                 android:textColor="#000"
                 android:textStyle="bold" />
 
@@ -39,7 +40,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Faculty"
+                android:fontFamily="@font/nunito_sans"
+                android:text="@string/faculty"
                 android:textColor="#000"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -50,7 +52,8 @@
             android:layout_height="match_parent"
             android:layout_margin="2dp"
             android:layout_weight="1"
-            android:text="Chapters"
+            android:fontFamily="@font/nunito_sans"
+            android:text="@string/chp"
             android:textColor="#000"
             android:textStyle="bold" />
 
@@ -60,7 +63,8 @@
             android:layout_height="match_parent"
             android:layout_margin="2dp"
             android:layout_weight="1"
-            android:text="Note"
+            android:fontFamily="@font/nunito_sans"
+            android:text="@string/note"
             android:textColor="#000"
             android:textStyle="bold" />
 

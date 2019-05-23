@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.google.firebase.database.FirebaseDatabase;
 import com.lilliemountain.reportcard.R;
 import com.lilliemountain.reportcard.adapter.TestReportAdapter;
+import com.lilliemountain.reportcard.model.ProgressCard;
 import com.lilliemountain.reportcard.model.ProgressReport;
 import com.lilliemountain.reportcard.model.ReportCard;
 
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 public class TestReportActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     ProgressReport progressReport;
-    ArrayList<ReportCard> list=new ArrayList<>();
+    ArrayList<ProgressCard> list=new ArrayList<>();
     TextView tots,grade;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +30,7 @@ public class TestReportActivity extends AppCompatActivity {
         grade=findViewById(R.id.grade);
         progressReport=getIntent().getParcelableExtra("progressReport");
         setTitle(progressReport.getTestName());
-        list.addAll(progressReport.getReportCard());
+        list.addAll(progressReport.getProgressCard());
         recyclerView.setAdapter(new TestReportAdapter(list));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         tots.setText(progressReport.getTotalMarks()+"/"+progressReport.getGrandTotal());

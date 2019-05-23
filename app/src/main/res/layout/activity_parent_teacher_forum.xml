@@ -29,7 +29,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
-            android:hint="Enter message" />
+            android:fontFamily="@font/nunito_sans"
+            android:hint="@string/enter_msg" />
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/send"

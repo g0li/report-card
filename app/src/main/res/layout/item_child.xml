@@ -30,7 +30,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Name :"
+                android:fontFamily="@font/nunito_sans"
+                android:text="@string/name"
                 android:textColor="#000"
                 android:textSize="14sp" />
 
@@ -39,6 +40,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="@font/nunito_sans"
                 android:textColor="#000"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -55,7 +57,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Grade :"
+                android:fontFamily="@font/nunito_sans"
+                android:text="@string/grade"
                 android:textColor="#000"
                 android:textSize="14sp" />
 
@@ -66,7 +69,8 @@
                 android:layout_weight="1"
                 android:textColor="#000"
                 android:textSize="14sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="@font/nunito_sans" />
         </LinearLayout>
 
         <LinearLayout
@@ -80,7 +84,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="School :"
+                android:fontFamily="@font/nunito_sans"
+                android:text="@string/school"
                 android:textColor="#000"
                 android:textSize="14sp" />
 
@@ -89,6 +94,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="@font/nunito_sans"
                 android:textColor="#000"
                 android:textSize="14sp"
                 android:textStyle="bold" />
