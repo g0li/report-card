@@ -185,7 +185,7 @@
                     android:textColor="@android:color/white"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    android:transitionName="markDown" />
+                    android:transitionName="rec" />
 
                 <TextView
                     android:id="@+id/syllabus"

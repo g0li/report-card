@@ -3,6 +3,7 @@
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
     <string name="sign_in">Sign In</string>
+    <string name="sign_up">Sign Up</string>
     <string name="instance">demo-report-card</string>
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -36,4 +37,11 @@
     <string name="today">Today</string>
     <string name="total_att">Total attendance is</string>
     <string name="att_of">Attendance of</string>
+    <string name="ad_mob_id" translatable="false">ca-app-pub-1019525559302935~6343195383</string>
+    <string name="ad_unit_id" translatable="false">ca-app-pub-1019525559302935/8226767478</string>
+    <string name="website_lilmtn" translatable="false">https://www.lilliemountain.com/</string>
+    <string name="website_url" translatable="false">https://report-card-59210.firebaseapp.com/login</string>
+    <string name="menu_translate">Translate</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="about_developer">About Developer</string>
 </resources>

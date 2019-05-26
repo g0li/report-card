@@ -2,14 +2,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/action_developer"
+        android:orderInCategory="10"
+        android:title="@string/about_developer"
+        app:showAsAction="withText"/>
+    <item
         android:id="@+id/action_translate"
         android:icon="@drawable/ic_translate"
-        android:orderInCategory="100"
-        android:title="Translate"
+        android:orderInCategory="200"
+        android:title="@string/menu_translate"
         app:showAsAction="collapseActionView"/>
     <item
         android:id="@+id/action_signOut"
-        android:orderInCategory="200"
-        android:title="Sign Out"
+        android:orderInCategory="300"
+        android:title="@string/sign_out"
         app:showAsAction="withText"/>
 </menu>
