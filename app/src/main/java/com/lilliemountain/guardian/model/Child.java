@@ -1,5 +1,6 @@
 package com.lilliemountain.guardian.model;
 
+import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -12,8 +13,27 @@ public class Child implements Parcelable {
     private String childName;
     private String parentEmail;
     private String rollNo;
-
+    private Uri image;
     public Child() {}
+
+    public Uri getImage() {
+        return image;
+    }
+
+    public void setImage(Uri image) {
+        this.image = image;
+    }
+
+    public Child(String childAge, String childClass, String childGender, String childGrade, String childName, String parentEmail, String rollNo, Uri image) {
+        this.childAge = childAge;
+        this.childClass = childClass;
+        this.childGender = childGender;
+        this.childGrade = childGrade;
+        this.childName = childName;
+        this.parentEmail = parentEmail;
+        this.rollNo = rollNo;
+        this.image = image;
+    }
 
     protected Child(Parcel in) {
         childAge = in.readString();
@@ -23,6 +43,24 @@ public class Child implements Parcelable {
         childName = in.readString();
         parentEmail = in.readString();
         rollNo = in.readString();
+        image = in.readParcelable(Uri.class.getClassLoader());
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(childAge);
+        dest.writeString(childClass);
+        dest.writeString(childGender);
+        dest.writeString(childGrade);
+        dest.writeString(childName);
+        dest.writeString(parentEmail);
+        dest.writeString(rollNo);
+        dest.writeParcelable(image, flags);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<Child> CREATOR = new Creator<Child>() {
@@ -93,19 +131,4 @@ public class Child implements Parcelable {
         this.rollNo = rollNo;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(childAge);
-        dest.writeString(childClass);
-        dest.writeString(childGender);
-        dest.writeString(childGrade);
-        dest.writeString(childName);
-        dest.writeString(parentEmail);
-        dest.writeString(rollNo);
-    }
 }

@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
+import android.os.Environment;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityOptionsCompat;
@@ -29,17 +30,27 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.lilliemountain.guardian.R;
 import com.lilliemountain.guardian.ReportCardManager;
 import com.lilliemountain.guardian.adapter.ChildAdapter;
 import com.lilliemountain.guardian.model.Child;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -55,10 +66,12 @@ public class UserActivity extends AppCompatActivity implements ChildAdapter.onCl
     String schoolKey;
     private AdView mAdView;
     ProgressBar progressBar;
+    private StorageReference mStorageRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FirebaseApp.initializeApp(this);
         getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
         getWindow().setExitTransition(new Explode());
         setContentView(R.layout.activity_user);
@@ -127,14 +140,29 @@ public class UserActivity extends AppCompatActivity implements ChildAdapter.onCl
                     students=d1.child("student");
                     for (DataSnapshot d2 :
                             students.getChildren()) {
-                        Child child=(d2.getValue(Child.class));
+                        final Child child=(d2.getValue(Child.class));
                         if (child.getParentEmail().equals(EM)) {
-                            children.add(d2.getValue(Child.class));
                             schoolist.add(schoolName);
                             if(of.length()>1)
                                 of=of+" & "+child.getChildName().split(" ")[0];
                             else
                                 of=of+child.getChildName().split(" ")[0];
+                            FirebaseStorage storage=FirebaseStorage.getInstance();
+                            String gsstring="gs://report-card-59210.appspot.com/"+getString(R.string.instance)+"/schools/"+schoolKey+"/"+child.getChildGrade()+"/"+child.getChildClass()+"/"+child.getRollNo()+".jpg";
+                            Log.e( "GS: ", gsstring);
+                            mStorageRef=storage.getReferenceFromUrl(gsstring);
+
+                            mStorageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    Log.e( "onSuccess: ",uri.toString() );
+                                    child.setImage(uri);
+                                    children.add(child);
+                                    childAdapter=new ChildAdapter(children,schoolist,UserActivity.this);
+                                    kidslist.setAdapter(childAdapter);
+                                    progressBar.setVisibility(View.GONE);
+                                }
+                            });
                         }
                     }
                 }
@@ -144,9 +172,7 @@ public class UserActivity extends AppCompatActivity implements ChildAdapter.onCl
                 checkoutchild.setText(getString(R.string.checkchild));
                 else
                 checkoutchild.setText(getString(R.string.checkchildren));
-                childAdapter=new ChildAdapter(children,schoolist,UserActivity.this);
-                kidslist.setAdapter(childAdapter);
-                progressBar.setVisibility(View.GONE);
+
 
             }
             @Override
@@ -248,6 +274,7 @@ public class UserActivity extends AppCompatActivity implements ChildAdapter.onCl
         ReportCardManager.getInstance().setValue("getChildName",child.getChildName());
         ReportCardManager.getInstance().setValue("getChildGender",child.getChildGender());
         ReportCardManager.getInstance().setValue("getRollNo",child.getRollNo()+"");
+        ReportCardManager.getInstance().setValue("getImage",child.getImage()+"");
         ReportCardManager.getInstance().setValue("sch",school);
         ReportCardManager.getInstance().setValue("schoolKey",schoolKey);
         ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, (View)cardView, "child");

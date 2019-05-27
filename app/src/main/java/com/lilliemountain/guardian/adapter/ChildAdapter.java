@@ -6,12 +6,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.lilliemountain.guardian.R;
 import com.lilliemountain.guardian.model.Child;
 
 
+import java.io.File;
 import java.util.List;
 
 public class ChildAdapter extends RecyclerView.Adapter<ChildAdapter.ChildHolder> {
@@ -38,6 +41,9 @@ public class ChildAdapter extends RecyclerView.Adapter<ChildAdapter.ChildHolder>
         childHolder.name.setText(children.get(i).getChildName());
         childHolder.grade.setText(children.get(i).getChildGrade());
         childHolder.school.setText(school.get(i));
+
+        Glide.with(childHolder.itemView).load(children.get(i).getImage()).error(android.R.color.holo_orange_light).into(childHolder.imageView2);
+
     }
 
     @Override
@@ -52,12 +58,14 @@ public class ChildAdapter extends RecyclerView.Adapter<ChildAdapter.ChildHolder>
         Child child;
         String sch;
         CardView cardView;
+        ImageView imageView2;
         public ChildHolder(@NonNull View itemView) {
             super(itemView);
             name=itemView.findViewById(R.id.name);
             school=itemView.findViewById(R.id.school);
             grade=itemView.findViewById(R.id.grade);
             cardView=itemView.findViewById(R.id.cardView);
+            imageView2=itemView.findViewById(R.id.imageView2);
 
             name.setOnClickListener(this);
             school.setOnClickListener(this);

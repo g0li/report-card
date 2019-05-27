@@ -3,6 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
     android:orientation="vertical">
 
     <android.support.v7.widget.CardView
@@ -67,6 +69,14 @@
                 android:fontFamily="@font/nunito_sans"
                 android:gravity="right"
                 android:textColor="#C8C8C8" />
+
+            <TextView
+                android:id="@+id/seen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="seen"
+                android:textColor="#fff"
+                android:textSize="10sp" />
         </LinearLayout>
     </android.support.v7.widget.CardView>
 

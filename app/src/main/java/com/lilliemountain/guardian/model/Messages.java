@@ -1,8 +1,19 @@
 package com.lilliemountain.guardian.model;
 
 public class Messages {
-    String message,timestamp;
-    boolean mymessage;
+    String message;
+    String timestamp;
+
+    public Messages(String message, String timestamp, String email, boolean seen, boolean mymessage) {
+        this.message = message;
+        this.timestamp = timestamp;
+        this.email = email;
+        this.seen = seen;
+        this.mymessage = mymessage;
+    }
+
+    String email;
+    boolean seen,mymessage;
 
     public Messages() {
     }
@@ -31,9 +42,19 @@ public class Messages {
         this.mymessage = mymessage;
     }
 
-    public Messages(String message, String timestamp, boolean mymessage) {
-        this.message = message;
-        this.timestamp = timestamp;
-        this.mymessage = mymessage;
+    public boolean isSeen() {
+        return seen;
+    }
+
+    public void setSeen(boolean seen) {
+        this.seen = seen;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

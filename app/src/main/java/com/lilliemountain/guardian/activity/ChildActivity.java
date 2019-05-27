@@ -1,23 +1,39 @@
 package com.lilliemountain.guardian.activity;
 
 import android.content.Intent;
+import android.media.Image;
+import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.transition.Explode;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.lilliemountain.guardian.R;
 import com.lilliemountain.guardian.ReportCardManager;
 import com.lilliemountain.guardian.model.Child;
+
+import java.io.File;
+import java.io.IOException;
 
 public class ChildActivity extends AppCompatActivity implements View.OnClickListener {
     Child child;
     String sch,schoolKey;
     TextView name,school,grade,classs;
     String rollno;
+    ImageView imageView2;
+    File localFile;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +45,7 @@ public class ChildActivity extends AppCompatActivity implements View.OnClickList
         school=findViewById(R.id.school);
         grade=findViewById(R.id.grade);
         classs=findViewById(R.id.classs);
+        imageView2=findViewById(R.id.imageView2);
 
         ReportCardManager.initializeInstance(this);
         child=new Child();
@@ -39,6 +56,7 @@ public class ChildActivity extends AppCompatActivity implements View.OnClickList
         child.setChildName(ReportCardManager.getInstance().getValue("getChildName"));
         child.setChildGender(ReportCardManager.getInstance().getValue("getChildGender"));
         child.setRollNo((ReportCardManager.getInstance().getValue("getRollNo")));
+        child.setImage(Uri.parse((ReportCardManager.getInstance().getValue("getImage"))));
 
         sch=ReportCardManager.getInstance().getValue("sch");
         schoolKey=ReportCardManager.getInstance().getValue("schoolKey");
@@ -56,6 +74,8 @@ public class ChildActivity extends AppCompatActivity implements View.OnClickList
         findViewById(R.id.academiccalender).setOnClickListener(this);
         findViewById(R.id.progressreport).setOnClickListener(this);
         findViewById(R.id.parentteacherforum).setOnClickListener(this);
+        Glide.with(imageView2).load(child.getImage()).error(android.R.color.holo_orange_light).into(imageView2);
+
     }
 
 
