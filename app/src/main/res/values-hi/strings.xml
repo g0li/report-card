@@ -40,5 +40,7 @@
     <string name="menu_translate">भाषा बदलें</string>
     <string name="sign_out">साइन आउट</string>
     <string name="about_developer">डेवलपर के बारे में</string>
+    <string name="action_how">मदद</string>
+
 
 </resources>

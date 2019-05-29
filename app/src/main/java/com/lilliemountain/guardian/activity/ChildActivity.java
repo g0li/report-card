@@ -31,7 +31,7 @@ public class ChildActivity extends AppCompatActivity implements View.OnClickList
     Child child;
     String sch,schoolKey;
     TextView name,school,grade,classs;
-    String rollno;
+    String rollno,nameStr,gradeStr;
     ImageView imageView2;
     File localFile;
     @Override
@@ -68,6 +68,8 @@ public class ChildActivity extends AppCompatActivity implements View.OnClickList
         grade.setText(child.getChildGrade());
         classs.setText(child.getChildClass());
         rollno=child.getRollNo();
+        gradeStr=child.getChildGrade();
+        nameStr=child.getChildName();
         findViewById(R.id.attendance).setOnClickListener(this);
         findViewById(R.id.syllabus).setOnClickListener(this);
         findViewById(R.id.timetable).setOnClickListener(this);
@@ -98,6 +100,8 @@ public class ChildActivity extends AppCompatActivity implements View.OnClickList
                 ActivityOptionsCompat attendance = ActivityOptionsCompat.makeSceneTransitionAnimation(this, v, "attendance");
                 startActivity(new Intent(ChildActivity.this,AttendanceActivity.class)
                         .putExtra("schoolKey",schoolKey)
+                        .putExtra("grade",gradeStr)
+                        .putExtra("name",nameStr)
                         .putExtra("rollno",rollno),attendance.toBundle());
                 break;
             case R.id.syllabus:

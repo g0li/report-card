@@ -1,11 +1,17 @@
 package com.lilliemountain.guardian.activity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -122,5 +128,76 @@ public class LoginActivity extends AppCompatActivity {
         a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(a);
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_login, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(final MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.action_how:
+                showHelp();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+    int counter=1;
+
+    private void showHelp() {
+        final Dialog dialog=new Dialog(this);
+        dialog.setContentView(R.layout.dialog_help);
+        final ConstraintLayout constraintLayout1,constraintLayout2,constraintLayout3;
+        constraintLayout1=dialog.findViewById(R.id.constraintLayout1);
+        constraintLayout2=dialog.findViewById(R.id.constraintLayout2);
+        constraintLayout3=dialog.findViewById(R.id.constraintLayout3);
+        final ProgressBar progressBar;
+        progressBar=dialog.findViewById(R.id.progressBar2);
+        progressBar.setMax(3);
+        progressBar.setProgress(counter);
+        dialog.findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(counter<=3){
+                    switch (counter)
+                    {
+                        case 1:
+                            constraintLayout1.setVisibility(View.VISIBLE);
+                            constraintLayout2.setVisibility(View.GONE);
+                            constraintLayout3.setVisibility(View.GONE);
+                            counter++;
+                            break;
+                        case 2:
+                            constraintLayout1.setVisibility(View.GONE);
+                            constraintLayout2.setVisibility(View.VISIBLE);
+                            constraintLayout3.setVisibility(View.GONE);
+                            counter++;
+                            break;
+                        case 3:
+                            constraintLayout1.setVisibility(View.GONE);
+                            constraintLayout2.setVisibility(View.GONE);
+                            constraintLayout3.setVisibility(View.VISIBLE);
+                            counter++;
+                            break;
+                            default:
+                                dialog.dismiss();
+                                counter=0;
+                    }
+                }
+                else{
+                    counter=0;
+                    dialog.dismiss();
+                }
+                progressBar.setProgress(counter);
+            }
+        });
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.show();
     }
 }

@@ -12,7 +12,7 @@ public class Attendance implements Parcelable {
     private String childName;
     private String dateOfAttendance;
     private String parentEmail;
-    private Integer rollNo;
+    private String rollNo;
 
     /**
      * No args constructor for use in serialization
@@ -31,7 +31,7 @@ public class Attendance implements Parcelable {
      * @param dateOfAttendance
      * @param attendance
      */
-    public Attendance(String attendance, String childClass, String childGrade, String childName, String dateOfAttendance, String parentEmail, Integer rollNo) {
+    public Attendance(String attendance, String childClass, String childGrade, String childName, String dateOfAttendance, String parentEmail, String rollNo) {
         super();
         this.attendance = attendance;
         this.childClass = childClass;
@@ -49,11 +49,7 @@ public class Attendance implements Parcelable {
         childName = in.readString();
         dateOfAttendance = in.readString();
         parentEmail = in.readString();
-        if (in.readByte() == 0) {
-            rollNo = null;
-        } else {
-            rollNo = in.readInt();
-        }
+        rollNo = in.readString();
     }
 
     public static final Creator<Attendance> CREATOR = new Creator<Attendance>() {
@@ -116,11 +112,11 @@ public class Attendance implements Parcelable {
         this.parentEmail = parentEmail;
     }
 
-    public Integer getRollNo() {
+    public String getRollNo() {
         return rollNo;
     }
 
-    public void setRollNo(Integer rollNo) {
+    public void setRollNo(String rollNo) {
         this.rollNo = rollNo;
     }
 
@@ -137,11 +133,6 @@ public class Attendance implements Parcelable {
         dest.writeString(childName);
         dest.writeString(dateOfAttendance);
         dest.writeString(parentEmail);
-        if (rollNo == null) {
-            dest.writeByte((byte) 0);
-        } else {
-            dest.writeByte((byte) 1);
-            dest.writeInt(rollNo);
-        }
+        dest.writeString(rollNo);
     }
 }

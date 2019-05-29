@@ -162,7 +162,6 @@ public class UserActivity extends AppCompatActivity implements ChildAdapter.onCl
                                 children.add(child);
                                 childAdapter=new ChildAdapter(children,schoolist,UserActivity.this);
                                 kidslist.setAdapter(childAdapter);
-                                progressBar.setVisibility(View.GONE);
                         }
                     }
                 }
@@ -173,7 +172,7 @@ public class UserActivity extends AppCompatActivity implements ChildAdapter.onCl
                 else
                 checkoutchild.setText(getString(R.string.checkchildren));
 
-
+                progressBar.setVisibility(View.GONE);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {

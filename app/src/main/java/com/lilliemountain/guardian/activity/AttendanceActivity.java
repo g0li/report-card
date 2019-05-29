@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.transition.Explode;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -29,7 +30,7 @@ import java.util.List;
 import java.util.Set;
 
 public class AttendanceActivity extends AppCompatActivity {
-    String rollno;
+    String rollno,grade,name;
     String schoolKey;
     FirebaseDatabase database;
     DatabaseReference instance,attendance;
@@ -56,6 +57,8 @@ public class AttendanceActivity extends AppCompatActivity {
         d=findViewById(R.id.d);
 
         rollno=getIntent().getStringExtra("rollno");
+        grade=getIntent().getStringExtra("grade");
+        name=getIntent().getStringExtra("name");
         getSupportActionBar().setTitle("Attendance");
         getSupportActionBar().setSubtitle("Roll no :" + rollno);
 
@@ -76,11 +79,12 @@ public class AttendanceActivity extends AppCompatActivity {
                     listofmonths.add(d1.getKey());
                     for (DataSnapshot d2 :
                             d1.getChildren()) {
-
+                        Log.e( "d2.getKey(): ",d2.getKey() );
                         Attendance a=d2.getValue(Attendance.class);
-                        if(a.getRollNo().toString().equals(rollno))
+                        if(a.getRollNo().equals(rollno) && a.getChildGrade().equals(grade) && a.getChildName().equals(name))
                         attendanceList.add(a);
                     }
+                    Log.e( "d2.getKey(): ",d1.getKey() );
                     stringListHashMap.put(d1.getKey(),attendanceList);
                 }
                 Set<String> temString=stringListHashMap.keySet();
