@@ -147,22 +147,22 @@ public class UserActivity extends AppCompatActivity implements ChildAdapter.onCl
                                 of=of+" & "+child.getChildName().split(" ")[0];
                             else
                                 of=of+child.getChildName().split(" ")[0];
-                            FirebaseStorage storage=FirebaseStorage.getInstance();
-                            String gsstring="gs://report-card-59210.appspot.com/"+getString(R.string.instance)+"/schools/"+schoolKey+"/"+child.getChildGrade()+"/"+child.getChildClass()+"/"+child.getRollNo()+".jpg";
-                            Log.e( "GS: ", gsstring);
-                            mStorageRef=storage.getReferenceFromUrl(gsstring);
+//                            FirebaseStorage storage=FirebaseStorage.getInstance();
+//                            String gsstring="gs://report-card-59210.appspot.com/"+getString(R.string.instance)+"/schools/"+schoolKey+"/"+child.getChildGrade()+"/"+child.getChildClass()+"/"+child.getRollNo()+".jpg";
+//                            mStorageRef=storage.getReferenceFromUrl(gsstring);
 
-                            mStorageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                @Override
-                                public void onSuccess(Uri uri) {
-                                    Log.e( "onSuccess: ",uri.toString() );
-                                    child.setImage(uri);
-                                    children.add(child);
-                                    childAdapter=new ChildAdapter(children,schoolist,UserActivity.this);
-                                    kidslist.setAdapter(childAdapter);
-                                    progressBar.setVisibility(View.GONE);
-                                }
-                            });
+//                            mStorageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//                                @Override
+//                                public void onSuccess(Uri uri) {
+//                                    Log.e( "onSuccess: ",uri.toString() );
+//                                    child.setImage(uri);
+//                                }
+//                            });
+
+                                children.add(child);
+                                childAdapter=new ChildAdapter(children,schoolist,UserActivity.this);
+                                kidslist.setAdapter(childAdapter);
+                                progressBar.setVisibility(View.GONE);
                         }
                     }
                 }
@@ -274,7 +274,7 @@ public class UserActivity extends AppCompatActivity implements ChildAdapter.onCl
         ReportCardManager.getInstance().setValue("getChildName",child.getChildName());
         ReportCardManager.getInstance().setValue("getChildGender",child.getChildGender());
         ReportCardManager.getInstance().setValue("getRollNo",child.getRollNo()+"");
-        ReportCardManager.getInstance().setValue("getImage",child.getImage()+"");
+//        ReportCardManager.getInstance().setValue("getImage",child.getImage()+"");
         ReportCardManager.getInstance().setValue("sch",school);
         ReportCardManager.getInstance().setValue("schoolKey",schoolKey);
         ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, (View)cardView, "child");

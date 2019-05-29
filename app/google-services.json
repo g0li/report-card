@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "935637726753",
+    "firebase_url": "https://report-card-59210.firebaseio.com",
+    "project_id": "report-card-59210",
+    "storage_bucket": "report-card-59210.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:935637726753:android:d7badc81ded46f85",
+        "android_client_info": {
+          "package_name": "com.lilliemountain.guardian"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "935637726753-bsncoa9smf91gl3a0eafv8u8og4qgl3o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lilliemountain.guardian",
+            "certificate_hash": "5bbc59296eee597bcc7f77821f7beb31ecf7df73"
+          }
+        },
+        {
+          "client_id": "935637726753-atr5icu25421tmlhho7rs8o8ftkr0m41.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdDjzcsCc_SB-jhC0uPSk316GP8mnRojI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "935637726753-atr5icu25421tmlhho7rs8o8ftkr0m41.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -42,7 +42,7 @@ public class ChildAdapter extends RecyclerView.Adapter<ChildAdapter.ChildHolder>
         childHolder.grade.setText(children.get(i).getChildGrade());
         childHolder.school.setText(school.get(i));
 
-        Glide.with(childHolder.itemView).load(children.get(i).getImage()).error(android.R.color.holo_orange_light).into(childHolder.imageView2);
+//        Glide.with(childHolder.itemView).load(children.get(i).getImage()).error(android.R.color.holo_orange_light).into(childHolder.imageView2);
 
     }
 

@@ -74,7 +74,7 @@ public class ChildActivity extends AppCompatActivity implements View.OnClickList
         findViewById(R.id.academiccalender).setOnClickListener(this);
         findViewById(R.id.progressreport).setOnClickListener(this);
         findViewById(R.id.parentteacherforum).setOnClickListener(this);
-        Glide.with(imageView2).load(child.getImage()).error(android.R.color.holo_orange_light).into(imageView2);
+//        Glide.with(imageView2).load(child.getImage()).error(android.R.color.holo_orange_light).into(imageView2);
 
     }
 

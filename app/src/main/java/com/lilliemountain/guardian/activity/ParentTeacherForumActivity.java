@@ -7,12 +7,9 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.ArrayMap;
-import android.util.Log;
-import android.util.TimingLogger;
 import android.view.View;
-import android.view.ViewTreeObserver;
+import android.widget.EditText;
 
-import com.cooltechworks.views.WhatsAppEditText;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,10 +22,7 @@ import com.lilliemountain.guardian.R;
 import com.lilliemountain.guardian.adapter.ParentTeacherForumAdapter;
 import com.lilliemountain.guardian.model.Messages;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -36,7 +30,7 @@ public class ParentTeacherForumActivity extends AppCompatActivity {
     ParentTeacherForumAdapter pTFA;
     FirebaseDatabase database;
     DatabaseReference PTF;
-    WhatsAppEditText messageme;
+    EditText messageme;
     FloatingActionButton send;
     RecyclerView everything;
     List<Messages> messages=new ArrayList<>();
@@ -80,6 +74,7 @@ public class ParentTeacherForumActivity extends AppCompatActivity {
                         msg.setSeen(true);
                     messages2.add(msg);
                 }
+                makeSeen();
             }
 
             @Override
@@ -93,8 +88,8 @@ public class ParentTeacherForumActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(messageme.getText().toString().trim().length()>0)
                 {
-                    SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy EEEE hh:mm a");
-                    Messages msg=new Messages(messageme.getText().toString(),formatDate.format(Calendar.getInstance().getTime()),email,false,true);
+                    String s= String.valueOf(System.currentTimeMillis());
+                    Messages msg=new Messages(messageme.getText().toString(),s,email,false,true);
                     PTF.push().setValue(msg).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
@@ -108,7 +103,7 @@ public class ParentTeacherForumActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        makeSeen();
+        finishAfterTransition();
     }
     private void makeSeen(){
         PTF.removeEventListener(veL);
@@ -119,8 +114,9 @@ public class ParentTeacherForumActivity extends AppCompatActivity {
         PTF.updateChildren(stringMessagesHashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                finishAfterTransition();
+                PTF.addValueEventListener(veL);
             }
         });
     }
 }
+

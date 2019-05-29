@@ -8,12 +8,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cooltechworks.views.WhatsAppTextView;
 import com.lilliemountain.guardian.R;
 import com.lilliemountain.guardian.model.Messages;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class ParentTeacherForumAdapter extends RecyclerView.Adapter<ParentTeacherForumAdapter.ParentTeacherForumHolder> {
@@ -38,13 +42,19 @@ public class ParentTeacherForumAdapter extends RecyclerView.Adapter<ParentTeache
             parentTeacherForumHolder.them.setVisibility(View.GONE);
             parentTeacherForumHolder.me.setVisibility(View.VISIBLE);
             parentTeacherForumHolder.messageme.setText(msg.getMessage());
-            parentTeacherForumHolder.timestampme.setText(msg.getTimestamp());
-
+            long tempStamp= Long.parseLong(msg.getTimestamp()) ;
+            Date date = new Date(tempStamp);
+            SimpleDateFormat formatDate = new SimpleDateFormat("dd MMM yy-EEE hh:mm a");
+            String tempDate=formatDate.format(date.getTime());
+            tempDate=tempDate.replace("-","\n");
+            parentTeacherForumHolder.timestampme.setText(tempDate);
             if (msg.isSeen()) {
-                parentTeacherForumHolder.seen.setVisibility(View.VISIBLE);
+                parentTeacherForumHolder.done.setVisibility(View.GONE);
+                parentTeacherForumHolder.doneall.setVisibility(View.VISIBLE);
             }
             else {
-                parentTeacherForumHolder.seen.setVisibility(View.GONE);
+                parentTeacherForumHolder.done.setVisibility(View.VISIBLE);
+                parentTeacherForumHolder.doneall.setVisibility(View.GONE);
             }
 
         }
@@ -53,7 +63,12 @@ public class ParentTeacherForumAdapter extends RecyclerView.Adapter<ParentTeache
             parentTeacherForumHolder.me.setVisibility(View.GONE);
             parentTeacherForumHolder.them.setVisibility(View.VISIBLE);
             parentTeacherForumHolder.messagethem.setText(msg.getMessage());
-            parentTeacherForumHolder.timestampthem.setText(msg.getTimestamp());
+            long tempStamp= Long.parseLong(msg.getTimestamp())*1000 ;
+            Date date = new Date(tempStamp);
+            SimpleDateFormat formatDate = new SimpleDateFormat("dd MMM yy-EEE hh:mm a");
+            String tempDate=formatDate.format(date.getTime());
+            tempDate=tempDate.replace("-","\n");
+            parentTeacherForumHolder.timestampme.setText(tempDate);
         }
     }
     @Override
@@ -63,14 +78,16 @@ public class ParentTeacherForumAdapter extends RecyclerView.Adapter<ParentTeache
 
     public class ParentTeacherForumHolder extends RecyclerView.ViewHolder {
         CardView me,them;
-        WhatsAppTextView messagethem,messageme;
-        TextView timestampthem,timestampme,seen;
+        TextView messagethem,messageme;
+        TextView timestampthem,timestampme;
+        ImageView done,doneall;
         public ParentTeacherForumHolder(@NonNull View itemView) {
             super(itemView);
             me=itemView.findViewById(R.id.me);
             messageme=itemView.findViewById(R.id.messageme);
             timestampme=itemView.findViewById(R.id.timestampme);
-            seen=itemView.findViewById(R.id.seen);
+            done=itemView.findViewById(R.id.done);
+            doneall=itemView.findViewById(R.id.doneall);
 
             them=itemView.findViewById(R.id.them);
             messagethem=itemView.findViewById(R.id.messagethem);

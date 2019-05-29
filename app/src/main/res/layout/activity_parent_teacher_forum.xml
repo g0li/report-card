@@ -23,7 +23,7 @@
         android:orientation="horizontal">
 
 
-        <com.cooltechworks.views.WhatsAppEditText
+        <EditText
             android:id="@+id/messageme"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
