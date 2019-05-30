@@ -42,6 +42,7 @@
     <string name="website_lilmtn" translatable="false">https://www.lilliemountain.com/</string>
     <string name="website_url" translatable="false">https://report-card-59210.firebaseapp.com/login</string>
     <string name="menu_translate">Translate</string>
+    <string name="menu_faq" translatable="false">FAQ</string>
     <string name="sign_out">Sign Out</string>
     <string name="about_developer">About Developer</string>
     <string name="action_how">Help</string>

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -88,7 +89,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 academicCalendars.clear();
-
+                Log.e( schoolKey,dataSnapshot.getKey()+"" );
                 for (DataSnapshot d1 :
                         dataSnapshot.getChildren()) {
                     AcademicCalendar ac = d1.getValue(AcademicCalendar.class);
@@ -100,6 +101,8 @@ public class RecyclerViewActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.e( schoolKey,databaseError.getMessage()+"" );
+
             }
         });
     }

@@ -28,12 +28,7 @@ import android.widget.Toast;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -41,16 +36,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FileDownloadTask;
-import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.lilliemountain.guardian.R;
 import com.lilliemountain.guardian.ReportCardManager;
 import com.lilliemountain.guardian.adapter.ChildAdapter;
 import com.lilliemountain.guardian.model.Child;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -132,7 +123,6 @@ public class UserActivity extends AppCompatActivity implements ChildAdapter.onCl
                 String of="";
                 for (DataSnapshot d1 :
                         dataSnapshot.getChildren()) {
-                    schoolKey=d1.getKey();
                     String schoolName;
                     DataSnapshot students;
                     schoolName=d1.child("schoolName").getValue().toString();
@@ -158,7 +148,7 @@ public class UserActivity extends AppCompatActivity implements ChildAdapter.onCl
 //                                    child.setImage(uri);
 //                                }
 //                            });
-
+                                child.setSchoolKey(d1.getKey());
                                 children.add(child);
                                 childAdapter=new ChildAdapter(children,schoolist,UserActivity.this);
                                 kidslist.setAdapter(childAdapter);
@@ -236,6 +226,10 @@ public class UserActivity extends AppCompatActivity implements ChildAdapter.onCl
                 i.setData(Uri.parse(getString(R.string.website_lilmtn)));
                 startActivity(i);
                 return true;
+            case R.id.action_faq:
+                Intent intesnt= new Intent(this,FAQActivity.class);
+                startActivity(intesnt);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -275,7 +269,7 @@ public class UserActivity extends AppCompatActivity implements ChildAdapter.onCl
         ReportCardManager.getInstance().setValue("getRollNo",child.getRollNo()+"");
 //        ReportCardManager.getInstance().setValue("getImage",child.getImage()+"");
         ReportCardManager.getInstance().setValue("sch",school);
-        ReportCardManager.getInstance().setValue("schoolKey",schoolKey);
+        ReportCardManager.getInstance().setValue("schoolKey",child.getSchoolKey());
         ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, (View)cardView, "child");
         startActivity(new Intent(UserActivity.this, ChildActivity.class),options.toBundle());
     }

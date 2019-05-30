@@ -24,8 +24,6 @@ import com.lilliemountain.guardian.R;
 import com.lilliemountain.guardian.ReportCardManager;
 import com.lilliemountain.guardian.model.Child;
 
-import java.io.File;
-import java.io.IOException;
 
 public class ChildActivity extends AppCompatActivity implements View.OnClickListener {
     Child child;
@@ -33,7 +31,6 @@ public class ChildActivity extends AppCompatActivity implements View.OnClickList
     TextView name,school,grade,classs;
     String rollno,nameStr,gradeStr;
     ImageView imageView2;
-    File localFile;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,13 +103,11 @@ public class ChildActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.syllabus:
                 startActivity(recylcerIntent.putExtra("name","sylx")
-                        .putExtra("schoolKey",schoolKey)
                         .putExtra("rollno",rollno)
                         .putExtra("grade",child.getChildGrade()),recylcerCompat.toBundle());
                 break;
             case R.id.timetable:
                 startActivity(recylcerIntent.putExtra("name","tt")
-                        .putExtra("schoolKey",schoolKey)
                         .putExtra("rollno",rollno)
                         .putExtra("grade",child.getChildGrade()),recylcerCompat.toBundle());
                 break;

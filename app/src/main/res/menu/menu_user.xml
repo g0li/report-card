@@ -13,8 +13,13 @@
         android:title="@string/menu_translate"
         app:showAsAction="collapseActionView"/>
     <item
-        android:id="@+id/action_signOut"
+        android:id="@+id/action_faq"
         android:orderInCategory="300"
+        android:title="@string/menu_faq"
+        app:showAsAction="collapseActionView"/>
+    <item
+        android:id="@+id/action_signOut"
+        android:orderInCategory="400"
         android:title="@string/sign_out"
         app:showAsAction="withText"/>
 </menu>

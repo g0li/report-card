@@ -7,4 +7,9 @@
         android:title="@string/action_how"
         android:icon="@drawable/ic_help_outline"
         app:showAsAction="always"/>
+    <item
+        android:id="@+id/action_faq"
+        android:orderInCategory="200"
+        android:title="@string/menu_faq"
+        app:showAsAction="always"/>
 </menu>

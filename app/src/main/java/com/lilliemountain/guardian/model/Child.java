@@ -13,8 +13,17 @@ public class Child implements Parcelable {
     private String childName;
     private String parentEmail;
     private String rollNo;
+    private String schoolKey;
     private Uri image;
     public Child() {}
+
+    public String getSchoolKey() {
+        return schoolKey;
+    }
+
+    public void setSchoolKey(String schoolKey) {
+        this.schoolKey = schoolKey;
+    }
 
     public Uri getImage() {
         return image;
@@ -24,7 +33,7 @@ public class Child implements Parcelable {
         this.image = image;
     }
 
-    public Child(String childAge, String childClass, String childGender, String childGrade, String childName, String parentEmail, String rollNo, Uri image) {
+    public Child(String childAge, String childClass, String childGender, String childGrade, String childName, String parentEmail, String rollNo, String schoolKey, Uri image) {
         this.childAge = childAge;
         this.childClass = childClass;
         this.childGender = childGender;
@@ -32,6 +41,7 @@ public class Child implements Parcelable {
         this.childName = childName;
         this.parentEmail = parentEmail;
         this.rollNo = rollNo;
+        this.schoolKey = schoolKey;
         this.image = image;
     }
 
@@ -43,6 +53,7 @@ public class Child implements Parcelable {
         childName = in.readString();
         parentEmail = in.readString();
         rollNo = in.readString();
+        schoolKey = in.readString();
         image = in.readParcelable(Uri.class.getClassLoader());
     }
 
@@ -54,6 +65,7 @@ public class Child implements Parcelable {
         dest.writeString(childGrade);
         dest.writeString(childName);
         dest.writeString(parentEmail);
+        dest.writeString(schoolKey);
         dest.writeString(rollNo);
         dest.writeParcelable(image, flags);
     }

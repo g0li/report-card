@@ -144,6 +144,10 @@ public class LoginActivity extends AppCompatActivity {
             case R.id.action_how:
                 showHelp();
                 return true;
+            case R.id.action_faq:
+                Intent intesnt= new Intent(this,FAQActivity.class);
+                startActivity(intesnt);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
